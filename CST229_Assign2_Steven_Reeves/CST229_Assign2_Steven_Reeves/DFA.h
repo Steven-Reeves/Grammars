@@ -23,12 +23,10 @@ private:
 		char currentState;
 		char inputChar;
 		char nextState;
+
 		Transition(char c, char i, char n);
 	};
 	char initialState;
-	// TODO: Remove these
-	std::list<Transition> transitions;
-	std::list<char> finalStates;
 
 	//Mapping idea
 	std::map<std::string, char> transitions1;

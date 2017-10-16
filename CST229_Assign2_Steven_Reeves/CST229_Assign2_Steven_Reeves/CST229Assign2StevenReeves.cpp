@@ -15,6 +15,7 @@ Assignment 2 part 2
 
 int main()
 {
+	// TODO: test inputs against outputs
 
 	int nStates = 0;
 	std::list<std::string> transitions;
@@ -64,6 +65,8 @@ int main()
 		dfa.setFinalState(f);
 	}
 
+	// TODO: check indexing issue
+
 	// Process each string and print accept or reject
 	for each(std::string s in inputStrings)
 	{
@@ -78,6 +81,9 @@ int main()
 			std::cout << "Rejected: " << "\t" << s << std::endl;
 		}
 	}
+
+	std::cout << "Press Any Key To Exit...";
+	system("pause");
 
     return 0;
 }

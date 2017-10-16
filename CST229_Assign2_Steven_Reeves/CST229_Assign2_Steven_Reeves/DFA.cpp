@@ -29,15 +29,13 @@ DFA::~DFA()
 
 void DFA::AddTransision(char currentState, char inputChar, char nextState)
 {
-	transitions.push_back(Transition(currentState, inputChar, nextState));
-	if (initialState == -1)
-// TODO: fix this
+	// Map for transitions
+	std::string key = MakeKey(currentState, inputChar);	
+	transitions1[key] = nextState;
 }
 
 void DFA::setFinalState(char finalState)
 {
-	finalStates.push_back(finalState);
-
 	// use a set for final states
 	finalStates1.insert(finalState);
 }
@@ -67,15 +65,6 @@ bool DFA::Accept(std::string s)
 	// if ended in a final state, we're good
 	return finalStates1.find(currentState) != finalStates1.end();
 
-/* TODO: remove this
-	for each (char f in finalStates)
-	{
-		if (f == currentState)
-			return true;
-	}
-
-	return false;
-	*/
 }
 
 std::string DFA::MakeKey(char currentState, char inputChar)
