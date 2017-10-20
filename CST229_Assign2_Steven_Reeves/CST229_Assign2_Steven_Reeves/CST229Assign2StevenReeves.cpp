@@ -12,20 +12,27 @@ Assignment 2 part 2
 #include <string>
 #include <list>
 #include <iostream>
+#include <conio.h>
 
 int main()
 {
-	// TODO: test inputs against outputs
+	// test inputs 1-4 check out
+	// Note: make sure test files are here:
+	// ... \CST229_Assign2_Steven_Reeves\CST229_Assign2_Steven_Reeves\CST 229 - Assign 2 - Test 4.txt
+
+	// Currently no cmd args in VS project.
 
 	int nStates = 0;
 	std::list<std::string> transitions;
 	std::list<char> finalStates;
 	std::list<std::string> inputStrings;
+	std::string comments;
 
 	// Read input
 	std::string line;
 	// Remove first line of comments
 	std::getline(std::cin, line);
+	comments = line;
 	// Get next line including number of states
 	std::getline(std::cin, line);
 	nStates = atoi(line.c_str());
@@ -45,7 +52,7 @@ int main()
 	}
 
 	// Read in strings
-	while (!std::getline(std::cin, line).eof())
+	while (std::getline(std::cin, line))
 	{
 		inputStrings.push_back(line);
 	}
@@ -65,7 +72,8 @@ int main()
 		dfa.setFinalState(f);
 	}
 
-	// TODO: check indexing issue
+	// Note comments before returning strings
+	std::cout << "Comments: " << "\t" << comments << std::endl;
 
 	// Process each string and print accept or reject
 	for each(std::string s in inputStrings)
@@ -83,7 +91,7 @@ int main()
 	}
 
 	std::cout << "Press Any Key To Exit...";
-	system("pause");
+	_getch();
 
     return 0;
 }
