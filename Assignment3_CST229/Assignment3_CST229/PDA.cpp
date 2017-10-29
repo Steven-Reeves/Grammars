@@ -25,12 +25,12 @@ void PDA::AddTransision(char currentState, std::string action, char dataChar, ch
 {
 	// Map for transitions
 	std::string key = MakeKey(currentState, dataChar);
+	// TODO use string to make a new action object
 	transitions[key] = nextState;
 }
 
 void PDA::setFinalState(char finalState)
 {
-	// use a set for final states
 	this->finalState = finalState;
 }
 
