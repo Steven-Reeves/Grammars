@@ -43,7 +43,8 @@ int main()
 	do 
 	{
 		inputStrings.push_back(line);
-	} while (std::getline(std::cin, line));
+	}
+	while (std::getline(std::cin, line));
 
 	PDA pda(transitions.front()[0]);
 
@@ -88,12 +89,12 @@ std::vector<std::string> SplitString(std::string input)
 {
 	std::vector<std::string> result;
 
-	int i = input.find(', ');
+	size_t i = input.find(", ");
 	while (i != -1)
 	{
 		result.push_back(input.substr(0, i));
-		input = input.substr(i + 2);
-		i = input.find(', ');
+		input = input.substr(i+2);
+		i = input.find(", ");
 	}
 	result.push_back(input);
 

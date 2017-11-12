@@ -24,7 +24,8 @@ private:
 		ACTION_TYPE type;
 		char dataChar;
 
-		Action(ACTION_TYPE t, char dataChar);
+		Action(ACTION_TYPE t, char dC) { type = t; dataChar = dC; };
+		Action() { type = READ; dataChar = 'z'; }
 
 	};
 

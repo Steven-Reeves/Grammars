@@ -9,24 +9,37 @@ Assignment 3 part 2
 
 #include "stdafx.h"
 #include "PDA.h"
-
+#include <stack>
+#include <conio.h>
 
 PDA::PDA(char initialState)
 {
 	this->initialState = initialState;
+	finalState = '\0';
 }
 
 PDA::~PDA()
 {
-
 }
 
 void PDA::AddTransision(char currentState, std::string action, char dataChar, char nextState)
 {
 	// Map for transitions
 	std::string key = MakeKey(currentState, dataChar);
-	// TODO use string to make a new action object
 	transitions[key] = nextState;
+
+	ACTION_TYPE at = READ;
+	if (action == "push")
+		at = PUSH;
+	else if (action == "pop")
+		at = POP;
+	else if (action == "read")
+		at = READ;
+	else
+		throw "unrecognized action!";
+
+	actions[currentState] = Action(at, dataChar);
+
 }
 
 void PDA::setFinalState(char finalState)
@@ -38,27 +51,48 @@ bool PDA::Accept(std::string s)
 {
 	//Start at beginning
 	char currentState = initialState;
+	std::stack<char> theStack;
 
-	//Character by char, move the machine
-	for each (char inputChar in s)
+	int index = 0;
+
+	while (currentState != finalState)
 	{
-		std::string key = MakeKey(currentState, inputChar);
+		Action & act = actions[currentState];
+		char c = act.dataChar;
 
+		switch (act.type)
+		{
+		case PUSH:
+			theStack.push(act.dataChar);
+			break;
+
+		case POP:
+			if (theStack.empty())
+				c = 'z';
+			else
+			{
+				c = theStack.top();
+				theStack.pop();
+			}
+			break;
+
+		case READ:
+			if (index >= s.length())
+				c = 'z';
+			else
+				c = s[index++];
+			break;
+		}
+
+		// Transisiton to next state 
+		std::string key = MakeKey(currentState, c);
 		if (transitions.find(key) != transitions.end())
-		{
-			// change to next state
 			currentState = transitions[key];
-		}
 		else
-		{
-			// No transition, not accepted!
 			return false;
-		}
 	}
 
-	// TODO check this If in final state, you're good!
-	return currentState == finalState;
-
+	return true;
 }
 
 std::string PDA::MakeKey(char currentState, char inputChar)
