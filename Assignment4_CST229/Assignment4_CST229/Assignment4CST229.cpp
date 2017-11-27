@@ -80,10 +80,10 @@ int main()
 			// Reject
 			std::cout << "Rejected: " << "\t" << s << std::endl;
 		}
+		// Print the contents of tape
+		std::cout << "-->\t" << t.ToString() << std::endl;
 	}
 
-	// TODO: print out tape 
-	std::cout << "-->\t" << t.ToString() << std::endl;
 	std::cout << "Press Any Key To Exit...";
 	_getch();
 
