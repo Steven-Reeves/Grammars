@@ -72,21 +72,27 @@ void Tape::Write(char c)
 	}
 }
 
+// TODO check this and change things
 std::string Tape::ToString()
 {
-	int i;
-	std::string result = leftContents.substr(1);
+	unsigned int i;
+	std::string result = "";
 
-	for (i = result.length() - 1; i >= 0 && result[i] == '_'; i--);
-		if (i > 0)
-			result.erase(i-1);
+	// copy in the leftContents (not including the 0th unused character)
+	// skipping any leading blanks '_'
+	for (i = leftContents.length() - 1; i > 0 && leftContents[i] == '_'; i--);
+	for (; i > 0; i--)
+		result += leftContents[i];
 
-	std::reverse(result.begin(), result.end());
-
-	result += rightContents;
-	for (i = result.length() - 1; i >= 0 && result[i] == '_'; i--);
-		if (i > 0)
-			result.erase(i-1);
+	// find where the rightContents ends, before trailing blanks '_'
+	unsigned int last = rightContents.find_last_not_of('_');
+	if (last != -1)
+	{
+		// copy in the rightContents
+		for (i = 0; i <= last; i++)
+			result += rightContents[i];
+	}
 
 	return result;
 }
+
