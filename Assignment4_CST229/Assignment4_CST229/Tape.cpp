@@ -22,7 +22,7 @@ void Tape::Left()
 	currentLocation--;
 
 	// if on left side
-	if (currentLocation < 0 && (size_t)-currentLocation >= leftContents.length())
+	if (currentLocation < 0 && (size_t)(-currentLocation) >= leftContents.length())
 	{
 		// Grow the tape and add more blanks
 		leftContents += '_';
@@ -72,7 +72,7 @@ void Tape::Write(char c)
 	}
 }
 
-// TODO check this and change things
+
 std::string Tape::ToString()
 {
 	unsigned int i;

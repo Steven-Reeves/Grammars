@@ -20,12 +20,12 @@ private:
 
 	struct Transition
 	{
-		DIRECTION direction;
 		char writeChar;
+		DIRECTION direction;
 		char nextState;
 
-		Transition(DIRECTION d, char wC, char nS) { direction = d; writeChar = wC; nextState = nS; };
-		Transition() { direction = LEFT; writeChar = '_'; nextState = 'H'; }
+		Transition(char wC, DIRECTION d, char nS) { writeChar = wC; direction = d;  nextState = nS; };
+		Transition() { writeChar = '_'; direction = LEFT;  nextState = 'H'; }
 
 	};
 
@@ -38,9 +38,9 @@ private:
 public:
 	TM(char initialState);
 	~TM();
-	void AddTransision(char currentState, char writeChar, char direction, char nextState);
+	void AddTransision(char currentState, char readChar, char writeChar, char direction, char nextState);
 	void setFinalState(char finalState);
-	bool Accept(std::string s);
+	bool Accept(std::string s, Tape & t);
 
 private:
 	std::string MakeKey(char currentState, char inputChar);

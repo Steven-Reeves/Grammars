@@ -52,10 +52,10 @@ int main()
 	// Add transitions
 	for each(std::string t in transitions)
 	{
-		// Each transition includes <current state>, <write char>, <direction>, <next state>
+		// Each transition includes <current state>, <read char>, <write char>, <direction>, <next state>
 		// <directions> in {'L', 'R'}
 		std::vector<std::string> parts = SplitString(t);
-		tm.AddTransision(parts[0][0], parts[1][0], parts[2][0], parts[3][0]);
+		tm.AddTransision(parts[0][0], parts[1][0], parts[2][0], parts[3][0], parts[4][0]);
 	}
 
 	// Set final states
@@ -70,7 +70,7 @@ int main()
 	{
 		// Make a tape
 		Tape t(s);
-		if (tm.Accept(s))
+		if (tm.Accept(s, t))
 		{
 			// Accept
 			std::cout << "Accepted: " << "\t" << s << std::endl;
